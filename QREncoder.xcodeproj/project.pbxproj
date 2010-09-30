@@ -14,6 +14,7 @@
 		308C61C5125534C6006B6A2F /* EncoderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C61C0125534C6006B6A2F /* EncoderController.m */; };
 		308C61C6125534C6006B6A2F /* QREncoderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C61C2125534C6006B6A2F /* QREncoderAppDelegate.m */; };
 		308C61C7125534C6006B6A2F /* writePNG.c in Sources */ = {isa = PBXBuildFile; fileRef = 308C61C3125534C6006B6A2F /* writePNG.c */; };
+		308C61F51255381D006B6A2F /* NSString+CSVUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C61F41255381D006B6A2F /* NSString+CSVUtils.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -37,6 +38,8 @@
 		308C61C2125534C6006B6A2F /* QREncoderAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QREncoderAppDelegate.m; sourceTree = "<group>"; };
 		308C61C3125534C6006B6A2F /* writePNG.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = writePNG.c; sourceTree = "<group>"; };
 		308C61C4125534C6006B6A2F /* writePNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writePNG.h; sourceTree = "<group>"; };
+		308C61F31255381D006B6A2F /* NSString+CSVUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CSVUtils.h"; sourceTree = "<group>"; };
+		308C61F41255381D006B6A2F /* NSString+CSVUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CSVUtils.m"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* QREncoder-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "QREncoder-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* QREncoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QREncoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -62,6 +65,8 @@
 				308C61C0125534C6006B6A2F /* EncoderController.m */,
 				308C61C1125534C6006B6A2F /* QREncoderAppDelegate.h */,
 				308C61C2125534C6006B6A2F /* QREncoderAppDelegate.m */,
+				308C61F31255381D006B6A2F /* NSString+CSVUtils.h */,
+				308C61F41255381D006B6A2F /* NSString+CSVUtils.m */,
 				308C61C3125534C6006B6A2F /* writePNG.c */,
 				308C61C4125534C6006B6A2F /* writePNG.h */,
 			);
@@ -230,6 +235,7 @@
 				308C61C5125534C6006B6A2F /* EncoderController.m in Sources */,
 				308C61C6125534C6006B6A2F /* QREncoderAppDelegate.m in Sources */,
 				308C61C7125534C6006B6A2F /* writePNG.c in Sources */,
+				308C61F51255381D006B6A2F /* NSString+CSVUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

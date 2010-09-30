@@ -9,49 +9,11 @@
 #import "EncoderController.h"
 #import "QREncoderAppDelegate.h"
 #import "qrencode.h"
+#import "NSString+CSVUtils.h"
+
 #include "writePNG.h"
 
 @implementation EncoderController
-
--(NSArray*)readCSV:(NSString*)path{
-	NSString* file = [NSString stringWithContentsOfFile:path encoding:NSWindowsCP1252StringEncoding error:nil];
-
-	NSArray* rows = [file componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-	NSMutableArray* names = [NSMutableArray arrayWithCapacity:0];
-	for(NSString* row in rows){
-		NSCharacterSet *spaces = [NSCharacterSet whitespaceCharacterSet];
-		NSCharacterSet *commas = [NSCharacterSet characterSetWithCharactersInString:@","];
-		
-		NSArray* nameArray = [row componentsSeparatedByCharactersInSet:commas];
-		NSString* lastName = [nameArray objectAtIndex:0];
-		NSString* firstName = [nameArray objectAtIndex:1];
-		
-		NSArray* lastNameArray = [lastName componentsSeparatedByCharactersInSet:spaces];
-		lastName = [lastNameArray count]>1 ? [lastNameArray componentsJoinedByString:@""] : lastName;
-
-		NSArray* firstNameArray = [firstName componentsSeparatedByCharactersInSet:spaces];
-		firstName = [firstNameArray count]>1 ? [firstNameArray componentsJoinedByString:@""] : firstName;
-
-		NSString* name = [NSString stringWithFormat:@"%@%@", firstName, lastName];
-		
-		[names addObject:name];
-	}
-	return names;
-}
-
--(void)createImagesWithNames:(NSArray*)names atDir:(NSString*)dir{
-	for(NSString* name in names){
-		NSString* path = [NSString stringWithFormat:@"%@/%@.png", dir, name];
-		NSString* url = [NSString stringWithFormat:@"http://www.studiocom.com/qr/%@", name];
-		
-		QRcode *code;
-		code = QRcode_encodeString([url cStringUsingEncoding:NSUTF8StringEncoding], 0, QR_ECLEVEL_L, QR_MODE_8, 1);
-		path = [NSString stringWithFormat:path, NSUserName()];
-		writePNG(code, [path UTF8String]);	
-		QRcode_free(code);
-		code = nil;
-	}
-}
 
 - (IBAction)chooseCSVFile:(id)sender{
 	//Display an open dialog and populate text field with chosen path
@@ -76,6 +38,19 @@
 	if([openDlg runModalForDirectory:nil file:nil] == NSOKButton){
 		NSString* file = [[openDlg filenames] objectAtIndex:0];
 		[fieldOutputDir setTitleWithMnemonic:file];
+	}
+}
+
+-(void)createImagesWithStrings:(NSArray*)strings atDir:(NSString*)dir{
+	for(NSArray* row in strings){
+		NSString* path = [NSString stringWithFormat:@"%@/%@.png", dir, [row objectAtIndex:0]];
+		NSString* string = [row objectAtIndex:1];
+		
+		QRcode *code;
+		code = QRcode_encodeString([string cStringUsingEncoding:NSUTF8StringEncoding], 0, QR_ECLEVEL_L, QR_MODE_8, 1);
+		writePNG(code, [path UTF8String]);	
+		QRcode_free(code);
+		code = nil;
 	}
 }
 
@@ -122,8 +97,9 @@
 	[tick setHidden:YES];
 	[spinner startAnimation:nil]; 	
 	
-	NSArray* names = [self readCSV:file];
-	[self createImagesWithNames:names atDir:dir];
+	NSString* fileContent = [NSString stringWithContentsOfFile:file encoding:NSWindowsCP1252StringEncoding error:nil];
+	NSArray* strings = [fileContent arrayByImportingCSV];
+	[self createImagesWithStrings:strings atDir:dir];
 	
 	[tick setHidden:NO];
 	[spinner stopAnimation:nil]; 
